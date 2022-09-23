@@ -1,6 +1,5 @@
 /* 2) Les types en JS */
 /* 2.1) Les différents types */
-/*
 function showType() {
     let x;
     x = [  , 'blabla', "blabla", `blabla${x}`, 9, 2.5, true, undefined, null, [1,2,3], new Array(), {}, {"promo":"lpwmce","nb":25}, new Date(), function(){alert('toto')}, 42n];
@@ -10,24 +9,24 @@ function showType() {
     }
 }
 showType();
-*/
 
 
 /* 2.2) Déclaration */
-/*
 function showType2(){
+    //peut se déclarer après et fonctionne quand même, contrairement au 'let'
+    var x = [ , 'blabla', "blabla", `blabla${x}`, 9, 2.5, true, undefined, null, [1,2,3], new Array(), {}, {"promo":"lpwmce","nb":25}, new Date(), function(){alert('toto')}, 42n];
     for(let i = 0; i <= x.length; i++){
         console.log(typeof x[i]);
     }
-    var x; //peut se déclarer après et fonctionne quand même, contrairement au 'let'
+    /* //var ne fonctionne pas que l'on déclare avant la fonction ?
+    var x;
     x = [ , 'blabla', "blabla", `blabla${x}`, 9, 2.5, true, undefined, null, [1,2,3], new Array(), {}, {"promo":"lpwmce","nb":25}, new Date(), function(){alert('toto')}, 42n];
+*/
 }
 showType2();
-*/
 
 
 /* 2.3) Conversions de type */
-/*
 function conversions(){
     let number = 15;
     let number1 = 10.569;
@@ -46,13 +45,10 @@ function conversions(){
 
     console.log(typeof Math.floor(number2)); //convertit la chaîne de caractère en type number
 }
-
 conversions();
-*/
 
 
 /* 2.4) Tests d'égalité */
-/*
 function equalityTest(){
     let b=false;
     let n=0;
@@ -84,14 +80,11 @@ function equalityTest(){
     console.log(tab === o);
     //même si les valeurs sont les mêmes -> false
 }
-
 equalityTest();
-*/
 
 
 /* 3) Les chaînes */
 /* 3.1) */
-/*
 function upperCase(){
     let text = window.prompt("Veuillez saisir une phrase");
 
@@ -100,11 +93,9 @@ function upperCase(){
     }
 }
 upperCase();
-*/
 
 
 /* 3.2) */
-/*
 function stringGenerator(){
     let specialChars = "~`!#$%^&*+=-_[]\\\';,/{}|\":<>?";
     let string;
@@ -130,14 +121,12 @@ function stringGenerator(){
         }
         counter++
     }
-    console.log("Nombre d'itérations : " + counter);
+    return console.log("Nombre d'itérations nécessaire : " + counter);
 }
 stringGenerator();
-*/
 
 
 /* 3.3) */
-/*
 function stringVowelGenerator(sizeOfString){
     let vowel = ['a', 'e', 'i', 'o', 'u', 'y'];
     let char = "";
@@ -149,11 +138,9 @@ function stringVowelGenerator(sizeOfString){
 
 }
 stringVowelGenerator(15);
-*/
 
 
 /* 3.4) */
-/*
 function concatNames(){
     let res;
     let firstName = window.prompt("Veuillez saisir votre prénom");
@@ -175,33 +162,27 @@ function concatNames(){
     console.log(res);
 }
 concatNames();
-*/
 
 
 /* 3.5) */
-/*
-function cryptedString() {
-    let cryptedCharacters = 'oizeasghbjklmndpqrftuvwxyc'; // autres caractères -> indexOf === -1
+function encryptedString() {
+    let encryptedCharacters = 'oizeasghbjklmndpqrftuvwxyc'; // autres caractères -> indexOf === -1
     let tab;
-    let tmp = [];
 
     let string = window.prompt("Ecrire un mot").toLowerCase();
 
     tab = string.split("")
-    tab.forEach(element => console.log(cryptedCharacters.indexOf(element)))
+    tab.forEach(element => console.log(encryptedCharacters.indexOf(element)))
 }
-cryptedString()
-*/
+encryptedString()
 
 
 /* 3.6.1) */
-/*
-function jazzBundle(){
-    const max = 100;
+function jazzBundle(max){
     let n = Math.round(Math.random() * max);
 
     for(let i = 1; i<=n; i++){
-         if ((i % 3 === 0) && (i % 5 === 0))
+         if ((i % 3 === 0) && (i % 5 === 0)) //possibilité de faire i % 15 === 0
             console.log("Jazz Bundle \n")
         else if(i % 3 === 0)
             console.log("Jazz \n");
@@ -211,13 +192,10 @@ function jazzBundle(){
             console.log(n)
     }
 }
-jazzBundle();
-*/
+jazzBundle(100);
 
 /* 3.6.2) */
-/*
-function jazzBundle2(){
-    const max = 100;
+function jazzBundle2(max){
     let n = Math.round(Math.random() * max);
     let msg;
 
@@ -234,14 +212,10 @@ function jazzBundle2(){
         console.log(msg);
     }
 }
-jazzBundle2();
-*/
-
+jazzBundle2(100);
 
 /* 4) Les tableaux et fonctions */
 /* 4.1) version algorithmique */
-/*
-tab = [5, 8, 9, 6, 2, 40, 89, 52, 41, 75];
 function addition(tab){
     let total = 0;
 
@@ -250,23 +224,17 @@ function addition(tab){
     }
     console.log("Somme de " + tab + " est " + total)
 }
-addition(tab);
-*/
+addition([5, 8, 9, 6, 2, 40, 89, 52, 41, 75]);
 
 /* 4.1) version programmation fonctionnelle */
-/*
-let tab = [5, 8, 9, 6, 2, 40, 89, 52, 41, 75];
 function addition2(tab){
     let total = tab.reduce((previousValue, currentValue) => previousValue + currentValue, 0);
     console.log("Somme de " + tab + " est " + total);
 }
-addition2(tab);
-*/
+addition2([5, 8, 9, 6, 2, 40, 89, 52, 41, 75]);
 
 
 /* 4.2) version algorithmique */
-/*
-tab = [5, 8, 9, 6, 2, 40, 89, 52, 41, 88];
 function numberOfPair(tab){
     let counter = 0;
 
@@ -277,26 +245,20 @@ function numberOfPair(tab){
     }
     console.log("Nombre d'entiers pair : " + counter)
 }
-numberOfPair(tab);
-*/
+numberOfPair([5, 8, 9, 6, 2, 40, 89, 52, 41, 88]);
 
 /* 4.2) Version programmation fonctionnelle */
-/*
-let tab = [5, 8, 9, 6, 2, 40, 89, 52, 41, 88];
 function numberOfPair2(tab){
-    let counter = 0
+    let counter
 
     counter = tab.filter(element => element % 2 === 0).length
     console.log("Nombre d'entiers pair : " + counter)
 }
-numberOfPair2(tab);
-*/
+numberOfPair2([5, 8, 9, 6, 2, 40, 89, 52, 41, 88]);
 
 
 /* 4.3) Version algorithmique */
-/*
-let tab1 = [1, 4, 7, 8, 12, 49];
-let tab2 = [2, 5, 6, 8, 75, 78];
+
 function sortTableFusion(tab1, tab2){
     let temp;
     let tab3 = tab1.concat(tab2);
@@ -313,37 +275,29 @@ function sortTableFusion(tab1, tab2){
     }
     return console.log(sortTab)
 }
-sortTableFusion(tab1, tab2);
-*/
+sortTableFusion([1, 4, 7, 8, 12, 49], [2, 5, 6, 8, 75, 78]);
 
-//ne fonctionne pas
 /* 4.3) version programmation fonctionnelle */
-/*
-let tab1 = [1, 4, 7, 8, 12, 49];
-let tab2 = [2, 5, 6, 8, 75, 78];
 function sortTableFusion2(tab1, tab2){
         let tab3 = tab1.concat(tab2);
         let sortTab = tab3;
         let temp;
 
-        tab3.forEach(element => {
-            sortTab.forEach(element1 => {
-              if(element < element1){
-                  temp = element;
-                  element = element1;
-                  sortTab.push(temp);
-              }
-            })
+    tab3.forEach((element, idx) => {
+        sortTab.forEach((element1, idx1) => {
+            if(tab3[idx] < element1){
+                temp = tab3[idx];
+                tab3[idx] = element1;
+                sortTab[idx1] = temp;
+            }
         })
+    })
     return console.log(sortTab)
 }
-sortTableFusion2(tab1, tab2);
-*/
+sortTableFusion2([1, 4, 7, 8, 12, 49], [2, 5, 6, 8, 75, 78]);
 
 
 /* 4.4) version algorithmique */
-/*
-let tab = [1, 2, 3, 4, 5, 6, 7, 8, 9, 75, 78, 88, 89, 96, 98, 102];
 function dichotomie(tab, f){
 
     let a = 0;
@@ -363,12 +317,9 @@ function dichotomie(tab, f){
     }
     return console.log("valeure non trouvée");
 }
-dichotomie(tab, 9)
-*/
+dichotomie([1, 2, 3, 4, 5, 6, 7, 8, 9, 75, 78, 88, 89, 96, 98, 102], 9)
 
 /* 4.4) version programmation fonctionnelle */
-/*
-let tab = [1, 2, 3, 4, 5, 6, 7, 8, 9, 75, 78, 88, 89, 96, 98, 102];
 function dichotomie2(tab, f){
     let m = 0;
 
@@ -381,12 +332,10 @@ function dichotomie2(tab, f){
     });
 
 }
-dichotomie2(tab, 9)
-*/
+dichotomie2([1, 2, 3, 4, 5, 6, 7, 8, 9, 75, 78, 88, 89, 96, 98, 102], 9)
 
 
 /* 4.5) version algorithmique */
-/*
 function higherPair(...numbers){
     let tabPair = [];
 
@@ -399,21 +348,16 @@ function higherPair(...numbers){
     console.log("Le plus grand entier pair est : " + Math.max(...tabPair));
 }
 higherPair(4, 5, 8, 1, 7, 6, 9, 98, 187, 146, 154);
-*/
 
 /* 4.5) version programmation fonctionnelle */
-/*
 function higherPair2(...numbers){
     let tabPair = numbers.filter(element => element % 2 === 0)
 
     console.log("Le plus grand entier pair est : " + Math.max(...tabPair));
 }
 higherPair2(4, 5, 8, 1, 7, 6, 9, 98, 187, 146, 154);
-*/
 
 /* 4.6) version algorithmique */
-/*
-let string = "C'est une phrase phrase avec plusieurs plusieurs mot pour tester tester la fonction la tester fonction";
 function occurrence(string){
     console.log(string);
     let text = string.toLowerCase().split(/[^a-zA-Z]/)
@@ -430,12 +374,9 @@ function occurrence(string){
     }
     return console.log(dictionary)
 }
-occurrence(string);
-*/
+occurrence("C'est une phrase phrase avec plusieurs plusieurs mot pour tester tester la fonction la tester fonction");
 
 /* 4.6) version programmation fonctionnelle */
-/*
-let string = "C'est une phrase phrase avec plusieurs plusieurs mot pour tester tester la fonction la tester fonction";
 function occurrence2(string){
     console.log(string);
     let text = string.toLowerCase().split(/[^a-zA-Z]/)
@@ -450,5 +391,4 @@ function occurrence2(string){
 
     return console.log(dictionary)
 }
-occurrence2(string);
-*/
+occurrence2("C'est une phrase phrase avec plusieurs plusieurs mot pour tester tester la fonction la tester fonction");
