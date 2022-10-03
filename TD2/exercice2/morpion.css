@@ -1,0 +1,28 @@
+table{
+    border-style: solid;
+    border-color: black;
+}
+.morpionButton{
+    font-size : 1.5em;
+    min-width: 50px;
+    min-height: 50px;
+}
+
+h1{
+    text-align: center;
+}
+
+#container {
+    display: flex;
+    justify-content: space-around;
+}
+
+#form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#gameZone{
+    display : none;
+}
