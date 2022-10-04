@@ -8,6 +8,8 @@ let scorePlayerTwo = 0
 //sert à la vérification du match nul
 let nbCoups = 0
 
+let maxSize
+
 
 let playerOne = "X"
 let playerTwo = "O"
@@ -53,6 +55,13 @@ function reloadGame(){
 
     setGameStatus("X")
     updateGameScore()
+
+    if(gameMode === "simple"){
+        maxSize = 3
+    }
+    else{
+        maxSize = parseInt(gridSize)
+    }
 }
 
 function addPoint(playerTurn){
@@ -74,8 +83,9 @@ function game(currentCase, x, y){
         document.getElementById(currentCase).value = playerTurn
         setGameStatus(playerTurn)
 
-        let victory = checkWin(x, y, playerTurn, gameMode)
+        let victory = checkWin(x, y, playerTurn)
         let nul = checkNul()
+
 
         if(victory){
             setGameStatus("win" + playerTurn)
@@ -97,71 +107,18 @@ function game(currentCase, x, y){
 
 //////////////////////////////////////////FONCTIONS VERIFICATIONS //////////////////////////////////////////////////
 //fonction de vérification de victoire
-function checkWin(x, y, playerTurn, gameMode){
-    if(gameMode === "simple"){
-        return checkRowSimple(x, playerTurn) || checkColumnSimple(y, playerTurn) || checkDiagonalSimple(x, y, playerTurn)
-            || checkReverseDiagonalSimple(x, y, playerTurn);
-    }
-    else if(gameMode === "complete"){
-        return checkRowComplete(x, y, playerTurn) || checkColumnComplete(x, y, playerTurn) || checkDiagonalComplete(x, y, playerTurn)
-            || checkReverseDiagonalComplete(x, y, playerTurn);
-    }
+function checkWin(x, y, playerTurn){
+    return checkRow(x, playerTurn) || checkColumn(y, playerTurn) || checkDiagonal(x, y, playerTurn)
+        || checkReverseDiagonal(x, y, playerTurn);
 }
 //fonction de vérification de match nul
 function checkNul(){
     return nbCoups === parseInt(gridSize) * parseInt(gridSize);
 
 }
-/////////////////////////////////////////////Mode complet//////////////////////////////////////////////////////////
-function checkRowComplete(x, y, playerTurn){
-    let row = x
-    let nbSymbols = 0
-    for(let column = 0; column < gridSize; column++){
-        if (morpion[row][column] === playerTurn){
-            nbSymbols++
-        }
-    }
-    return nbSymbols === parseInt(gridSize)
-}
 
-function checkColumnComplete(x, y, playerTurn){
-    let column = y
-    let nbSymbols = 0
-    for(let row = 0; row < gridSize; row++){
-        if(morpion[row][column] === playerTurn){
-            nbSymbols++
-        }
-    }
-    return nbSymbols === parseInt(gridSize)
-}
-
-function checkDiagonalComplete(x, y, playerTurn){
-    if(x === y){
-        let nbSymbols = 0
-        for(let rc = 0; rc < gridSize; rc++){
-            if(morpion[rc][rc] === playerTurn){
-                nbSymbols++
-            }
-        }
-        return nbSymbols === parseInt(gridSize)
-    }
-}
-
-function checkReverseDiagonalComplete(x, y, playerTurn){
-    if(x === gridSize - (y + 1)){
-        let nbSymbols = 0
-        for(let row = 0; row < gridSize; row++){
-            if(morpion[row][gridSize - (row + 1)] === playerTurn){
-                nbSymbols++
-            }
-        }
-        return nbSymbols === parseInt(gridSize)
-    }
-}
-
-/////////////////////////////////////////////Mode simple//////////////////////////////////////////////////////////
-function checkRowSimple(x, playerTurn){
-    let victoryPattern = playerTurn.concat(playerTurn).concat(playerTurn)
+function checkRow(x, playerTurn){
+    let victoryPattern = playerTurn.repeat(parseInt(maxSize))
 
     let pattern = ''
     morpion[x].forEach(element => (pattern = pattern.concat(element)))
@@ -170,8 +127,8 @@ function checkRowSimple(x, playerTurn){
         return true
 }
 
-function checkColumnSimple(y, playerTurn){
-    let victoryPattern = playerTurn.concat(playerTurn).concat(playerTurn)
+function checkColumn(y, playerTurn){
+    let victoryPattern = playerTurn.repeat(maxSize)
 
     let pattern = ''
     morpion.forEach(element => (pattern = pattern.concat(element[y])))
@@ -180,8 +137,8 @@ function checkColumnSimple(y, playerTurn){
         return true
 }
 
-function checkDiagonalSimple(x, y, playerTurn){
-    let victoryPattern = playerTurn.concat(playerTurn).concat(playerTurn)
+function checkDiagonal(x, y, playerTurn){
+    let victoryPattern = playerTurn.repeat(maxSize)
     if(x === y) {
         let pattern = ''
 
@@ -194,8 +151,8 @@ function checkDiagonalSimple(x, y, playerTurn){
     }
 }
 
-function checkReverseDiagonalSimple(x, y, playerTurn) {
-    let victoryPattern = playerTurn.repeat(3)
+function checkReverseDiagonal(x, y, playerTurn){
+    let victoryPattern = playerTurn.repeat(maxSize)
     if(x === gridSize - (y + 1)){
         let pattern = ''
 
@@ -207,6 +164,7 @@ function checkReverseDiagonalSimple(x, y, playerTurn) {
             return true
     }
 }
+
 
 //////////////////////////////////////FONCTION AFFICHAGE///////////////////////////////////////////////////////////////
 
