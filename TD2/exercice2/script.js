@@ -40,6 +40,7 @@ function reloadPseudo(){
     if(document.getElementById("player2").value !== ""){
         playerNameTwo = document.getElementById("player2").value
     }
+    setGameStatus(playerTurn)
 }
 
 /**
@@ -53,6 +54,7 @@ function reloadGame(){
     //récupération du mode de jeu
     gameMode = document.getElementById("gameMode").value
     reloadPseudo()
+    setGameStatus(playerTurn)
 
     let grid = document.getElementById("grid")
     grid.innerHTML = ""
@@ -94,11 +96,9 @@ function game(currentCase, x, y){
         morpion[x][y] = playerTurn
         nbCoups++
         document.getElementById(currentCase).value = playerTurn
-        setGameStatus(playerTurn)
 
         let victory = checkWin(x, y, playerTurn)
         let nul = checkNul()
-
         if(victory){
             setGameStatus("win" + playerTurn)
             addPoint(playerTurn)
@@ -111,11 +111,14 @@ function game(currentCase, x, y){
             reloadBtn.style.display = "block"
             updateGameScore()
         }
+        else{
+            playerTurn === playerOne ? playerTurn = playerTwo : playerTurn = playerOne
+            setGameStatus(playerTurn)
+        }
     }
     else{
         alert("La case est déjà occupé")
     }
-    playerTurn === playerOne ? playerTurn = playerTwo : playerTurn = playerOne
 }
 
 /**
