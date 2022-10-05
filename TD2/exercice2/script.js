@@ -1,32 +1,38 @@
+//initialisation de variable de base pour le morpion
 let playerNameOne = "Joueur 1"
 let playerNameTwo = "Joueur 2"
-let gridSize = 3
 let gameMode = "simple"
+let gridSize = "3"
 let scorePlayerOne = 0
 let scorePlayerTwo = 0
 
-//sert à la vérification du match nul
+//initialisation de variable pour vérifier les coups des joueurs
+//sert à compter le nombre de coups pour la vérification du match nul
 let nbCoups = 0
-
+//tableau en deux dimensions qui sert à stocker les symboles des joueurs
+let morpion
+//taille de la grille de morpion en fonction du mode simple, ou du mode complet
 let maxSize
 
-
+//symboles des joueurs
 let playerOne = "X"
 let playerTwo = "O"
+//correspond au tour du joueur en fonction du symbole
 let playerTurn = playerOne
 
-let morpion
-
+//label où s'affichera des informations au courant de la partie (tour, gagné ou nul)
 let gameStatus = document.getElementById("gameStatus")
+//label qui sert à afficher les scores
 let gameScore = document.getElementById("gameScore")
 
-let pseudos = document.getElementById("reloadPseudo")
-pseudos.addEventListener('click', reloadPseudo)
-
+//bouton jouer et recommencer
 let reloadBtn = document.getElementById("reloadGame")
 reloadBtn.addEventListener('click', reloadGame)
 
-
+/**
+ * fonction qui permet le changement de pseudo des deux joueurs
+ * @returns {void}
+ */
 function reloadPseudo(){
     if(document.getElementById("player1").value !== ""){
         playerNameOne = document.getElementById("player1").value
@@ -34,13 +40,17 @@ function reloadPseudo(){
     if(document.getElementById("player2").value !== ""){
         playerNameTwo = document.getElementById("player2").value
     }
-
-    setGameStatus(playerTurn)
 }
 
+/**
+ * fonction qui sert à lancer et relancer la partie
+ * @returns {void}
+ */
 function reloadGame(){
     document.getElementById("gameZone").style.display = "block"
+    //récupération de la taille de la grille
     gridSize = document.getElementById("gridSize").value
+    //récupération du mode de jeu
     gameMode = document.getElementById("gameMode").value
     reloadPseudo()
 
@@ -53,29 +63,32 @@ function reloadGame(){
     reloadBtn.value = "Recommencer"
     reloadBtn.style.display = "none"
 
-    setGameStatus("X")
-    updateGameScore()
-
     if(gameMode === "simple"){
         maxSize = 3
     }
     else{
         maxSize = parseInt(gridSize)
     }
+
+    updateGameScore()
 }
 
+/**
+ * fonction qui permet d'ajouter un point au score du joueur gagnant
+ * @param { String } playerTurn
+ * @return void
+ */
 function addPoint(playerTurn){
     playerTurn === 'X' ? scorePlayerOne++ : scorePlayerTwo++
 }
 
-// j'ai essayé ce morceau de code pour récupérer tous les boutons de la grille de morpion, mais ne fonctionne pas comme
-// je le veux, j'ai donc décidé d'ajouter des id à chaque bouton des cellules de la grille de morpion
-/*let pions = document.querySelectorAll(".morpionButton")
-pions.forEach(pions => {
-    pions.addEventListener('click', playGame, {once : true})
-})*/
-
-
+/**
+ * fonction qui permet au joueur de mettre son symbole dans une case
+ * @param {String} currentCase
+ * @param {int} x
+ * @param {int} y
+ * @return void
+ */
 function game(currentCase, x, y){
     if(morpion[x][y] === " "){
         morpion[x][y] = playerTurn
@@ -85,7 +98,6 @@ function game(currentCase, x, y){
 
         let victory = checkWin(x, y, playerTurn)
         let nul = checkNul()
-
 
         if(victory){
             setGameStatus("win" + playerTurn)
@@ -97,36 +109,61 @@ function game(currentCase, x, y){
         else if(nul){
             setGameStatus("nul")
             reloadBtn.style.display = "block"
+            updateGameScore()
         }
     }
     else{
-        setGameStatus("complete")
+        alert("La case est déjà occupé")
     }
     playerTurn === playerOne ? playerTurn = playerTwo : playerTurn = playerOne
 }
 
-//////////////////////////////////////////FONCTIONS VERIFICATIONS //////////////////////////////////////////////////
-//fonction de vérification de victoire
+/**
+ * fonction de vérification de victoire
+ * @param {int} x
+ * @param {int} y
+ * @param {String} playerTurn
+ * @returns {boolean}
+ */
 function checkWin(x, y, playerTurn){
     return checkRow(x, playerTurn) || checkColumn(y, playerTurn) || checkDiagonal(x, y, playerTurn)
         || checkReverseDiagonal(x, y, playerTurn);
 }
-//fonction de vérification de match nul
+
+/**
+ * fonction de vérification de match nul
+ * @returns {boolean}
+ */
 function checkNul(){
     return nbCoups === parseInt(gridSize) * parseInt(gridSize);
 
 }
 
+/**
+ * fonction de vérification des lignes du morpion
+ * @param {int} x
+ * @param {String} playerTurn
+ * @returns {boolean}
+ */
 function checkRow(x, playerTurn){
-    let victoryPattern = playerTurn.repeat(parseInt(maxSize))
+    //création d'un pattern de victoire en fonction du mode de jeu
+    let victoryPattern = playerTurn.repeat(maxSize)
 
+    //pour chaque ligne, on ajoute à une chaine de caractères le symbole de la case courante
     let pattern = ''
     morpion[x].forEach(element => (pattern = pattern.concat(element)))
 
+    //si la chaîne de caractère contient le victoryPattern alors le joueur courant à gagné
     if(pattern.indexOf(victoryPattern) >= 0)
         return true
 }
 
+/**
+ * fonction de vérification des colonnes du morpion
+ * @param {int} y
+ * @param {String} playerTurn
+ * @returns {boolean}
+ */
 function checkColumn(y, playerTurn){
     let victoryPattern = playerTurn.repeat(maxSize)
 
@@ -137,6 +174,13 @@ function checkColumn(y, playerTurn){
         return true
 }
 
+/**
+ * fonction de vérification de la diagonale du morpion
+ * @param {int} x
+ * @param {int} y
+ * @param {String} playerTurn
+ * @returns {boolean}
+ */
 function checkDiagonal(x, y, playerTurn){
     let victoryPattern = playerTurn.repeat(maxSize)
     if(x === y) {
@@ -151,6 +195,13 @@ function checkDiagonal(x, y, playerTurn){
     }
 }
 
+/**
+ * fonction de vérification de la diagonale inverse du morpion
+ * @param {int} x
+ * @param {int} y
+ * @param {String} playerTurn
+ * @returns {boolean}
+ */
 function checkReverseDiagonal(x, y, playerTurn){
     let victoryPattern = playerTurn.repeat(maxSize)
     if(x === gridSize - (y + 1)){
@@ -166,9 +217,12 @@ function checkReverseDiagonal(x, y, playerTurn){
 }
 
 
-//////////////////////////////////////FONCTION AFFICHAGE///////////////////////////////////////////////////////////////
-
-//fonction création de la grille de morpion
+/**
+ * fonction création de la grille de morpion
+ * @param {Element} div
+ * @param {String} gridSize
+ * @returns {void}
+ */
 function drawGrid(div, gridSize){
     //création d'un tableau pour stocker les symboles pour les vérifications de victoire
     morpion = Array(gridSize)
@@ -178,7 +232,6 @@ function drawGrid(div, gridSize){
         morpion[i] = Array(gridSize)
         let row = table.insertRow(i)
         for(let j = 0; j < gridSize; j++){
-            //on remplie chaque cellule de la ligne i d'espace pour l'instant
             morpion[i][j] = ' '
             let cell = row.insertCell(j)
             let button = document.createElement('input')
@@ -186,14 +239,21 @@ function drawGrid(div, gridSize){
             let id = i.toString() + j.toString()
             button.setAttribute("id", id)
             button.setAttribute("class", "morpionButton")
+            //ajout d'un id pour récupérer la case courante, i pour la ligne courante et j pour la colonne courante pour le tableau morpion
             button.setAttribute("onclick", "game(" + '"' +id + '"' + ", " + i + ", " + j + ")")
             cell.appendChild(button)
         }
     }
     console.log(morpion)
+    document.getElementsByClassName("morpionButton").disabled = false
     div.appendChild(table)
 }
 
+/**
+ * fonction pour changer le texte du label gameStatus
+ * @param {String} status
+ * @returns {void}
+ */
 function setGameStatus(status){
     let textStatus
 
@@ -211,15 +271,16 @@ function setGameStatus(status){
             textStatus = "Bravo " + playerNameTwo + ", tu as gagné ! :D"
             break
         case 'nul':
-            textStatus = "Egalité, aucun de vous deux n'a gagné."
-            break
-        case 'complete':
-            textStatus = "La case est déjà occupée."
+            textStatus = "Égalité, aucun de vous deux n'a gagné."
             break
     }
     gameStatus.innerText = textStatus
 }
 
+/**
+ * fonction pour changer le score à chaque fin de partie
+ * @returns {void}
+ */
 function updateGameScore(){
     gameScore.innerText = playerNameOne + " : " + scorePlayerOne + " / " + playerNameTwo + " : " + scorePlayerTwo
 }

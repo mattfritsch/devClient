@@ -1,15 +1,29 @@
-table{
-    border-style: solid;
-    border-color: black;
+body{
+    background: skyblue;
+    font-family: arial, sans-serif;
 }
+td{
+    border-right : 2px solid black;
+}
+
+td:nth-last-child(1){
+    border-right : none;
+}
+
+tr{
+    border-bottom : 2px solid black;
+}
+
+tr:nth-last-child(1){
+    border-bottom : none;
+}
+
 .morpionButton{
     font-size : 1.5em;
     min-width: 50px;
     min-height: 50px;
-}
-
-h1{
-    text-align: center;
+    background-color: lightcyan;
+    border : none;
 }
 
 #container {
@@ -17,12 +31,32 @@ h1{
     justify-content: space-around;
 }
 
+#gameZone{
+    display : none;
+    padding : 2em;
+    border-radius: 30px 100px;
+    background-color: lightcyan;
+    text-align: center;
+
+}
+
 #form{
     display: flex;
     justify-content: center;
     flex-direction: column;
+    padding : 1em;
 }
 
-#gameZone{
-    display : none;
+h1{
+    text-align: center;
+    text-decoration: underline;
+}
+
+label{
+    text-decoration: underline;
+}
+
+input:hover{
+    background: deepskyblue;
+    border-radius: 5px;
 }

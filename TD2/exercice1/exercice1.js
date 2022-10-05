@@ -1,4 +1,7 @@
-//Ajout de l'article 0
+/**
+ * Fonction pour ajouter l'article 0
+ * @returns {void}
+ */
 function addArticle(){
     let body = document.getElementsByTagName("body")
     let newH = document.createElement('h2')
@@ -10,7 +13,10 @@ function addArticle(){
     body[0].prepend(newH, newP)
 }
 
-//Modification du texte des titres en majuscule sans CSS
+/**
+ * fonction pour modifier le texte des titres en majuscule sans CSS
+ * @returns {void}
+ */
 function titleToUpperCaseWithoutCSS(){
     let titles = document.getElementsByTagName('h2');
     for(let i = 0; i < titles.length; i++){
@@ -18,7 +24,10 @@ function titleToUpperCaseWithoutCSS(){
     }
 }
 
-//Modfication du texte des titres en majuscule avec CSS
+/**
+ * fonction pour modifier le texte des titres en majuscule avec CSS
+ * @returns {void}
+ */
 function titleToUpperCasewithCSS(){
     let titles = document.getElementsByTagName('h2');
 
@@ -28,7 +37,10 @@ function titleToUpperCasewithCSS(){
     }
 }
 
-//Décaler les numéros d'article
+/**
+ * fonction pour décaler les numéros d'article
+ * @returns {void}
+ */
 function shiftTo(){
     let titles = document.getElementsByTagName('h2');
     let nameArticle
@@ -39,7 +51,10 @@ function shiftTo(){
     }
 }
 
-//couleur de fond un article sur deux (titre + texte)
+/**
+ * fonction pour ajouter une couleur de fond un article sur deux (titre + texte)
+ * @returns {void}
+ */
 function addBackgroundColor(){
     let titles = document.getElementsByTagName('h2')
     let i = 1
@@ -61,7 +76,10 @@ function addBackgroundColor(){
     }
 }
 
-//inverser l'ordre des trois périodes d'inscription à l'article 4 => comprends rien
+/**
+ * fonction pour inverser l'ordre des trois périodes d'inscription à l'article 4
+ * @returns {void}
+ */
 function reverseInscription(){
     let body = document.body
     let element = body.firstElementChild
