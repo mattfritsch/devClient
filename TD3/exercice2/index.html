@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 2 - TD3</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1> TD3 Modules et DOM</h1>
+<div class="container">
+  <div class="form">
+    <p>Saisie des éléments du tableau</p>
+      <div id="elements">
+          <div class="input-element">
+              <label for="element1"> Elément 1 : </label>
+              <input type="text" id="element1">
+              <button type="button" id="addButton">+</button>
+          </div>
+      </div>
+    <div>
+        <label for="search">Elément à rechercher : </label>
+        <input type="text" id="search">
+    </div>
+    <div>
+        <button type="button" id="searchButton">Produire les résultats</button>
+    </div>
+  </div>
+  <div class="res">
+    <p>Somme des éléments : <label id="sum"></label></p>
+    <p>Nombre de pairs : <label id="numberOf"></label></p>
+    <p>Plus grand élément pair : <label id="max"></label></p>
+    <p>Position de l'élément dans la table : <label id="position"></label></p>
+  </div>
+</div>
+</body>
+<script src="td3_modules2.js" type="module"></script>
+</html>
