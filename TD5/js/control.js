@@ -15,6 +15,7 @@ let url
 
 //index auquelle l'API commence à envoyer les résultats
 let start = 0
+let page = 1
 
 /**
  * cette fonction permet de récupérer les différents contrôle technique du département ou du département et de la commune
@@ -32,7 +33,7 @@ async function getControls(){
     table.innerHTML = ""
     if(json['nhits'] > 0){
         await json.records.forEach( function (item){
-            info.innerText = "Nombre de contrôle technique : " + json['nhits']
+            info.innerText = "Nombre de contrôle technique : " + json['nhits'] + " -- Page " + page + " sur " + parseInt(json['nhits'])/10
             let tr = document.createElement("tr");
             let address = document.createElement("td")
             address.innerText = item.fields['cct_adresse'] + ", " + item.fields['cct_code_commune'] + ", "
@@ -60,6 +61,7 @@ getControls().catch((function (error){
 function next(){
     //start est incrémentée de 10 pour récupérer les 10 prochaines lignes du résultat de l'API
     start += 10
+    page++
     getControls().catch((function (error){
         console.log("problème fetch: " + error.message)
     }))
@@ -71,8 +73,8 @@ function next(){
 function previous(){
     //start est décrémentée de 10 pour récupérer les 10 précédentes lignes du résultat de l'API
     start -= 10
-    url = isTownship()
-    getControls(url).catch((function (error){
+    page--
+    getControls().catch((function (error){
         console.log("problème fetch: " + error.message)
     }))
 }
