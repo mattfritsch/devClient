@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>TD5 - AJAX et DOM</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+<h1>Utilisation d'une API gouvernementale</h1>
+<div class="container">
+  <div id="department-container">
+    <label for="department-select">Choisir un département : </label>
+    <select name="departments" id="department-select">
+      <option value="">--Choisir un département--</option>
+    </select>
+  </div>
+  <div id="township-container">
+    <label for="township-select">Choisir une commune : </label>
+    <select name="townships" id="township-select">
+      <option value="">--Choisir une commune--</option>
+    </select>
+  </div>
+  <div id="population-container">
+    <p id="population"></p>
+  </div>
+  <div class="container-button">
+    <a href="html/weather.html"><button id="weather-button">Météo</button></a>
+    <a href="html/control.html"><button id="control-button">Contrôle technique</button></a>
+  </div>
+</div>
+</body>
+<script src="js/index.js"></script>
+</html>

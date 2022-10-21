@@ -1,0 +1,59 @@
+#township-container{
+    display : none
+}
+
+#weather-button{
+    display: none;
+}
+
+#control-button{
+    display: none;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    background-color: whitesmoke;
+}
+
+a{
+    text-decoration: none;
+}
+
+h1{
+    margin-top : 2em;
+    margin-bottom : 2em;
+    text-decoration: underline;
+}
+
+div{
+    padding: 1em;
+}
+
+.container{
+    display : flex;
+    justify-content: center;
+    flex-flow: column;
+}
+
+.container-button{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-flow: row;
+}
+
+button{
+    padding: 1em;
+    margin: 1em;
+    background-color: lightblue;
+    border-radius: 1em;
+    border-color: lightblue;
+    color: darkslateblue;
+}
+
+button:hover{
+    border-color: darkslateblue;
+    background-color: skyblue;
+
+}

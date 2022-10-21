@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Controle-technique</title>
+    <link rel="stylesheet" href="../style/control.css">
+</head>
+<body>
+<div class="container">
+    <h1>Contrôle technique : <span id="localization"></span></h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Adresse</th>
+            <th>Nom du contrôle technique</th>
+            <th>Téléphone</th>
+            <th>Prix</th>
+        </tr>
+        </thead>
+        <tbody id="ctList">
+
+        </tbody>
+    </table>
+    <div class="container-button">
+        <button class="btn" onclick="previous()">
+            <</button>
+        <span id="pageInfo"></span>
+        <button class="btn" onclick="next()">></button>
+    </div>
+    <div>
+        <a href="../index.html"><button class="back-btn">Retour</button></a>
+    </div>
+</div>
+</body>
+<script src="../js/control.js"></script>
+</html>
